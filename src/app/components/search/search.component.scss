@@ -1,0 +1,36 @@
+.search-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  .serch-inputs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .search-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .button {
+    width: 160px;
+  }
+}
+
+@media screen and (max-width: 833px) {
+  .serch-inputs {
+    margin: 0 auto;
+  }
+
+  .search-buttons {
+    margin: 0 auto;
+  }
+}

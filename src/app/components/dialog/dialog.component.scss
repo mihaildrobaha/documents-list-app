@@ -1,0 +1,57 @@
+.dialog-wrapper {
+  .dialog-header {
+    padding: 0px 10px;
+    background-color: rgb(63, 84, 192);
+    color: white;
+  }
+
+  .dialod-checkbox {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+  }
+
+  .inputs-with-datepicker {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 0px 10px;
+
+    .input-document-type {
+      width: 40%;
+    }
+
+    .input-document-series {
+      width: 15%;
+    }
+
+    .datepicker {
+      display: flex;
+      flex: 0 1 25%;
+      width: 25%;
+    }
+  }
+
+  .select-input-with-mask-input {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 0px 10px;
+
+    .select-input {
+      display: flex;
+      flex: 0 1 73.5%;
+    }
+
+    .mask-input {
+      display: flex;
+      flex: 0 1 25%;
+      width: 25%;
+    }
+  }
+
+  .dialog-button {
+    display: flex;
+    justify-content: space-between;
+  }
+}

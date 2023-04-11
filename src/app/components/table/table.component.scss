@@ -1,0 +1,77 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+
+  .nav-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .button {
+    width: 160px;
+  }
+
+  .add-button {
+    background-color: orange;
+  }
+
+  .nav-checkbox {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 833px) {
+  .nav-buttons {
+    margin: 0 auto;
+  }
+
+  .nav-checkbox {
+    margin: 0 auto;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgb(130, 130, 130, 0.5);
+  vertical-align: bottom;
+}
+
+td {
+  text-align: left;
+  height: 40px;
+  padding: 10px;
+  border-bottom: 1px solid rgb(130, 130, 130, 0.5);
+}
+
+.is-archived {
+  background-color: lightgreen;
+}
+
+.not-main {
+  padding-left: 37px;
+}
+
+.icon-main-document {
+  color: rgb(195, 10, 10);
+}
+
+.is-selected {
+  background-color: rgba(255, 244, 41, 0.5);
+}
+
+.table-hovered:hover {
+  background-color: rgb(200, 200, 200, 0.5);
+  transition: 300ms;
+  cursor: pointer;
+}

@@ -1,0 +1,80 @@
+<div class="nav-container">
+  <div class="nav-buttons">
+    <button
+      mat-raised-button
+      class="button add-button"
+      (click)="addDocuments()"
+    >
+      Добавить
+      <span class="material-icons"> add </span>
+    </button>
+    <button
+      [disabled]="isDisabledButtons"
+      mat-raised-button
+      color="primary"
+      class="button"
+    >
+      <span class="material-icons"> edit_document </span>
+      Редактировать
+    </button>
+    <button
+      [disabled]="isDisabledButtons"
+      mat-raised-button
+      color="warn"
+      class="button"
+      (click)="removeDocument()"
+    >
+      <span class="material-icons"> delete </span>Удалить
+    </button>
+  </div>
+  <div class="nav-checkbox">
+    <mat-checkbox class="checkbox" (click)="toggleArchived()"
+      >Показать архивные</mat-checkbox
+    >
+  </div>
+</div>
+
+<table *ngIf="documents" class="table">
+  <thead>
+    <tr>
+      <th>Вид документа</th>
+      <th>Серия</th>
+      <th>Номер</th>
+      <th>Дата Выдачи</th>
+    </tr>
+  </thead>
+
+  <tbody
+    *ngFor="
+      let document of documents | paginate : { itemsPerPage: 5, currentPage: p }
+    "
+    [ngClass]="{
+      'is-archived': document.isArchived
+    }"
+  >
+    <tr
+      class="table-hovered"
+      (click)="toggleSelected(document.id)"
+      [ngClass]="{
+        'is-selected': document.isSelected
+      }"
+    >
+      <td
+        [ngClass]="{
+          'not-main': !document.isMain
+        }"
+      >
+        <span *ngIf="document.isMain" class="material-icons icon-main-document">
+          check
+        </span>
+        {{ document.documentType }}
+      </td>
+      <td>{{ document.series }}</td>
+      <td>{{ document.number }}</td>
+      <td>{{ document.dateOfIssue }}</td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="documents">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
