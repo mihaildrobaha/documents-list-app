@@ -35,6 +35,9 @@ export class SearchComponent {
   }
 
   public clearSearch(): void {
+    if (this.myForm.value.documentNumber === '') {
+      return;
+    }
     this.onClearSearch.emit();
     this.setDefaultInputValue();
   }

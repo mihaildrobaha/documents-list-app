@@ -134,6 +134,7 @@ export class AppComponent implements OnInit {
     this.documents = this.dataService
       .getDocuments()
       .filter((document: IDocument) => document.isArchived === false);
+    this.unselectAllDocuments();
   }
 
   public toggleSelectedDocuments(id: string): void {
