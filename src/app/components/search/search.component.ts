@@ -23,6 +23,9 @@ export class SearchComponent {
   });
 
   public searchDocument(): void {
+    if (this.myForm.value.documentNumber === '') {
+      return;
+    }
     const dataForSearch: ISearchData = {
       documentType: this.myForm.value.documentType,
       documentNumber: this.myForm.value.documentNumber,
@@ -38,5 +41,6 @@ export class SearchComponent {
 
   public setDefaultInputValue(): void {
     this.myForm.reset();
+    this.myForm.value.documentNumber = '';
   }
 }
