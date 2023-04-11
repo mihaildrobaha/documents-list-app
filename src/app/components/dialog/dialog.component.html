@@ -1,93 +1,102 @@
-<div class="dialog-wrapper">
+<div *ngIf="myForm" class="dialog-wrapper">
   <h2 class="dialog-header">Документ</h2>
-  <div class="dialod-checkbox">
-    <mat-checkbox class="checkbox"
-      >Основной документ, удостоверяющий личность</mat-checkbox
-    >
-    <mat-checkbox class="checkbox">Архивный документ</mat-checkbox>
-  </div>
-
-  <div class="inputs-with-datepicker">
-    <mat-form-field appearance="fill" class="input-document-type">
-      <mat-label>Вид документа:</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let type of types" [value]="type.value">
-          {{ type.typeValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="input-document-series">
-      <mat-label>Серия:</mat-label>
-      <input matInput type="text" [(ngModel)]="value" />
-      <button
-        *ngIf="value"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="value = ''"
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <div class="dialod-checkbox">
+      <mat-checkbox class="checkbox" formControlName="isMain"
+        >Основной документ, удостоверяющий личность</mat-checkbox
       >
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-
-    <mat-form-field class="input-document-series">
-      <mat-label>Номер:</mat-label>
-      <input matInput type="text" [(ngModel)]="value" />
-      <button
-        *ngIf="value"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="value = ''"
+      <mat-checkbox class="checkbox" formControlName="isArchived"
+        >Архивный документ</mat-checkbox
       >
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill" class="datepicker">
-      <mat-label>Дата выдачи:</mat-label>
-      <input matInput [matDatepicker]="picker" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
+    <div class="inputs-with-datepicker">
+      <mat-form-field appearance="fill" class="input-document-type">
+        <mat-label>Вид документа:</mat-label>
+        <mat-select formControlName="documentType">
+          <mat-option
+            *ngFor="let documentType of documentTypes"
+            [value]="documentType.type"
+          >
+            {{ documentType.type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <div class="select-input-with-mask-input">
-    <mat-form-field appearance="fill" class="select-input">
-      <mat-label>Организация, выдавшая документ:</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let type of types" [value]="type.value">
-          {{ type.typeValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field class="input-document-series">
+        <mat-label>Серия:</mat-label>
+        <input matInput type="text" formControlName="series" />
+      </mat-form-field>
 
-    <mat-form-field class="mask-input">
-      <mat-label>Код подразделения:</mat-label>
-      <input matInput type="text" [(ngModel)]="value" [textMask]="mask" />
+      <mat-form-field class="input-document-series">
+        <mat-label>Номер:</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="number"
+          [textMask]="numberMask"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="datepicker">
+        <mat-label>Дата выдачи:</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dateOfIssue"
+        />
+        <mat-hint>ММ/ДД/ГГГГ</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="select-input-with-mask-input">
+      <mat-form-field appearance="fill" class="select-input">
+        <mat-label>Организация, выдавшая документ:</mat-label>
+        <mat-select formControlName="organization">
+          <mat-option
+            *ngFor="let organizationType of organizationTypes"
+            [value]="organizationType.type"
+          >
+            {{ organizationType.type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mask-input">
+        <mat-label>Код подразделения:</mat-label>
+        <input
+          matInput
+          type="text"
+          [textMask]="divisionCodeMask"
+          formControlName="divisionCode"
+        />
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions class="dialog-button">
       <button
-        *ngIf="value"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="value = ''"
+        [disabled]="myForm.invalid"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="true"
       >
-        <mat-icon>close</mat-icon>
+        Сохранить
       </button>
-    </mat-form-field>
-  </div>
-
-  <mat-dialog-actions class="dialog-button">
-    <button mat-raised-button color="primary" [mat-dialog-close]="true">
-      Сохранить
-    </button>
-    <button mat-raised-button color="basic" mat-dialog-close cdkFocusInitial>
-      Выход
-    </button>
-  </mat-dialog-actions>
+      <button
+        type="button"
+        mat-raised-button
+        color="basic"
+        mat-dialog-close
+        cdkFocusInitial
+      >
+        Выход
+      </button>
+    </mat-dialog-actions>
+  </form>
 </div>

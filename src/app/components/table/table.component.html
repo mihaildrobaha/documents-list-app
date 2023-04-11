@@ -9,16 +9,17 @@
       <span class="material-icons"> add </span>
     </button>
     <button
-      [disabled]="isDisabledButtons"
+      [disabled]="isDisabledEditButton"
       mat-raised-button
       color="primary"
       class="button"
+      (click)="editDocument()"
     >
       <span class="material-icons"> edit_document </span>
       Редактировать
     </button>
     <button
-      [disabled]="isDisabledButtons"
+      [disabled]="isdisabledDeleteButton"
       mat-raised-button
       color="warn"
       class="button"
@@ -28,19 +29,30 @@
     </button>
   </div>
   <div class="nav-checkbox">
-    <mat-checkbox class="checkbox" (click)="toggleArchived()"
+    <mat-checkbox
+      [disabled]="isDisableArchiveCheckbox"
+      class="checkbox"
+      (click)="toggleArchived()"
       >Показать архивные</mat-checkbox
     >
   </div>
 </div>
 
-<table *ngIf="documents" class="table">
+<table *ngIf="documents && documents.length" class="table">
   <thead>
     <tr>
-      <th>Вид документа</th>
-      <th>Серия</th>
-      <th>Номер</th>
-      <th>Дата Выдачи</th>
+      <th class="type-document" (click)="sortDocumentsByType()">
+        Вид документа<span class="material-icons sort-icon"> height </span>
+      </th>
+      <th (click)="sortDocumentsBySeries()">
+        Серия<span class="material-icons sort-icon"> height </span>
+      </th>
+      <th (click)="sortDocumentsByNumber()">
+        Номер<span class="material-icons sort-icon"> height </span>
+      </th>
+      <th (click)="sortDocumentsByDate()">
+        Дата Выдачи<span class="material-icons sort-icon"> height </span>
+      </th>
     </tr>
   </thead>
 
@@ -75,6 +87,10 @@
     </tr>
   </tbody>
 </table>
-<div *ngIf="documents">
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div *ngIf="documents && documents.length">
+  <pagination-controls
+    (pageChange)="p = $event"
+    previousLabel="Предыдущая страница"
+    nextLabel="Следующая страница"
+  ></pagination-controls>
 </div>

@@ -1,21 +1,42 @@
-import { Component } from '@angular/core';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ISearchData, IType } from 'src/app/models/documents.interface';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  public value: string = '';
+  @Output() onSearchDocument: EventEmitter<ISearchData> =
+    new EventEmitter<ISearchData>();
+  @Output() onClearSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
+  public documentTypes: IType[] = [
+    { type: 'Паспорт' },
+    { type: 'Загран. паспорт' },
+    { type: 'Свидетельство о рождении' },
   ];
+
+  public myForm: FormGroup = new FormGroup({
+    documentType: new FormControl(''),
+    documentNumber: new FormControl(''),
+  });
+
+  public searchDocument(): void {
+    const dataForSearch: ISearchData = {
+      documentType: this.myForm.value.documentType,
+      documentNumber: this.myForm.value.documentNumber,
+    };
+
+    this.onSearchDocument.emit(dataForSearch);
+  }
+
+  public clearSearch(): void {
+    this.onClearSearch.emit();
+    this.setDefaultInputValue();
+  }
+
+  public setDefaultInputValue(): void {
+    this.myForm.reset();
+  }
 }

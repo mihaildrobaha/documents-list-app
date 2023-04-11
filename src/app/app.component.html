@@ -1,8 +1,24 @@
-<app-search></app-search>
+<app-search
+  (onSearchDocument)="searchDocument($event)"
+  (onClearSearch)="clearSearch()"
+></app-search>
 <app-table
   [documents]="documents"
-  [isDisabledButtons]="disabledButtons"
+  [archivedDocuments]="archivedDocuments"
+  [isArchived]="isArchived"
+  [isdisabledDeleteButton]="isdisabledDeleteButton"
+  [isDisableArchiveCheckbox]="isDisableArchiveCheckbox"
+  [isDisabledEditButton]="isDisabledEditButton"
+  [isSortByDocumentType]="isSortByDocumentType"
+  [isSortDocumentsBySeries]="isSortDocumentsBySeries"
+  [isSortDocumentsByNumber]="isSortDocumentsByNumber"
+  [isSortDocumentsByDate]="isSortDocumentsByDate"
+  [documentIdForEdit]="documentIdForEdit"
   (onToggleArchivedDocuments)="toggleArchivedDocuments($event)"
   (onToggleSelectedDocuments)="toggleSelectedDocuments($event)"
-  (onRemoveSelectedDocuments)="removeSelectedDocoments($event)"
+  (onRemoveSelectedDocuments)="removeSelectedDocuments($event)"
+  (onSortByDocumentType)="sortDocumentsByType($event)"
+  (onSortDocumentsBySeries)="sortDocumentsBySeries($event)"
+  (onSortDocumentsByNumber)="sortDocumentsByNumber($event)"
+  (onSortDocumentsByDate)="sortDocumentsByDate($event)"
 ></app-table>

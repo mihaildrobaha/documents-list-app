@@ -1,5 +1,5 @@
 export interface IDocument {
-  id: number;
+  id: string;
   documentType: string;
   series: string;
   number: number;
@@ -9,4 +9,13 @@ export interface IDocument {
   isSelected: boolean;
   organization: string;
   divisionCode: string;
+}
+
+export interface IType {
+  type: string;
+}
+
+export interface ISearchData {
+  documentType: string;
+  documentNumber: number;
 }
